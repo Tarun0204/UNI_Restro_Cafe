@@ -14,7 +14,6 @@ const Header = () => {
         type="button"
         className="cart-icon-button"
         aria-label="Cart"
-        onClick={() => navigate('/cart')}
       >
         <AiOutlineShoppingCart className="cart-icon" />
       </button>
