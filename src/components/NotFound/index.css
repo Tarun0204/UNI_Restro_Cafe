@@ -1,0 +1,54 @@
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 50px;
+}
+
+.not-found-heading {
+  color: #334155;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  letter-spacing: 0.1px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.not-found-para {
+  color: #334155cc;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.1px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+@media (max-width: 768px) {
+  .not-found-heading {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .not-found-para {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .not-found-heading {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .not-found-para {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}

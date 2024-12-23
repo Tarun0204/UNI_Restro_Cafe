@@ -1,221 +1,210 @@
 .dish-item-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    margin-right: 25px;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    flex-wrap: wrap;
-  }
-  
-  .left {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .center {
-    display: flex;
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-right: 25px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+}
+
+.left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.dish-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.dish-price {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: darkslategrey;
+  font-weight: bold;
+}
+
+.dish-para {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: grey;
+  font-weight: 500;
+}
+
+.buttons-container {
+  display: flex;
+  align-items: center;
+  background-color: green;
+  padding: 5px;
+  width: 120px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.dish-btn {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin: 0 5px;
+  border-radius: 10px;
+}
+
+.quantity {
+  font-size: 1.2rem;
+  margin: 0 10px;
+  color: #ffff;
+}
+
+.not-available-text,
+.addon-available-text {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.add-btn {
+  background-color: orange;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.not-available {
+  color: red;
+  font-weight: bold;
+}
+
+.custom-available {
+  color: purple;
+  font-weight: bold;
+}
+
+.dish-calories {
+  font-size: 1.2rem;
+  color: orange;
+  font-weight: 500;
+}
+
+.dish-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-left: 20px;
+}
+
+@media (max-width: 768px) {
+  .left,
   .right {
     flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    margin-bottom: 20px;
   }
-  
+
   .dish-name {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 10px;
+    font-size: 1.3rem;
   }
-  
+
   .dish-price {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    color: darkslategrey;
-    font-weight: bold;
+    font-size: 1rem;
   }
-  
+
   .dish-para {
-    font-size: 1rem;
-    margin-bottom: 10px;
-    color: grey;
-    font-weight: 500;
+    font-size: 0.9rem;
   }
-  
-  .buttons-container {
-    display: flex;
-    align-items: center;
-    background-color: green;
-    padding: 5px;
-    width: 120px;
-    border-radius: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .dish-btn {
-    background-color: green;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    margin: 0 5px;
-    border-radius: 10px;
-  }
-  
-  .quantity {
-    font-size: 1.2rem;
-    margin: 0 10px;
-    color: #ffff;
-  }
-  
-  .not-available-text,
-  .addon-available-text {
-    font-size: 1rem;
-    margin-bottom: 10px;
-  }
-  
-  .add-btn {
-    background-color: orange;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-    border-radius: 20px;
-    font-weight: bold;
-  }
-  
-  .not-available {
-    color: red;
-    font-weight: bold;
-  }
-  
-  .custom-available {
-    color: purple;
-    font-weight: bold;
-  }
-  
+
   .dish-calories {
-    font-size: 1.2rem;
-    color: orange;
-    font-weight: 500;
+    font-size: 1rem;
   }
-  
+
   .dish-image {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    margin-left: 20px;
+    width: 120px;
+    height: 120px;
   }
-  
-  @media (max-width: 768px) {
-    .left,
-    .center,
-    .right {
-      flex: 1;
-      margin-bottom: 20px;
-    }
-  
-    .dish-name {
-      font-size: 1.3rem;
-    }
-  
-    .dish-price {
-      font-size: 1rem;
-    }
-  
-    .dish-para {
-      font-size: 0.9rem;
-    }
-  
-    .dish-calories {
-      font-size: 1rem;
-    }
-  
-    .dish-image {
-      width: 120px;
-      height: 120px;
-    }
-  
-    .controller-container {
-      flex-direction: row;
-      align-items: center;
-    }
-  
-    .quantity {
-      font-size: 1rem;
-    }
-  
-    .dish-btn {
-      padding: 5px 8px;
-    }
-  
-    .add-btn {
-      font-size: 1rem;
-      padding: 8px 10px;
-    }
+
+  .controller-container {
+    flex-direction: row;
+    align-items: center;
   }
-  
-  @media (max-width: 480px) {
-    .dish-item-container {
-      padding: 10px;
-    }
-  
-    .left,
-    .center,
-    .right {
-      flex: 1;
-      margin-bottom: 15px;
-    }
-  
-    .dish-name {
-      font-size: 1.1rem;
-    }
-  
-    .dish-price {
-      font-size: 0.9rem;
-    }
-  
-    .dish-para {
-      font-size: 0.8rem;
-    }
-  
-    .dish-calories {
-      font-size: 1rem;
-    }
-  
-    .dish-image {
-      width: 100px;
-      height: 100px;
-    }
-  
-    .buttons-container {
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-    }
-  
-    .quantity {
-      font-size: 1rem;
-    }
-  
-    .dish-btn {
-      padding: 4px 6px;
-    }
-  
-    .add-btn {
-      font-size: 0.9rem;
-      padding: 6px 8px;
-    }
+
+  .quantity {
+    font-size: 1rem;
   }
-  
+
+  .dish-btn {
+    padding: 5px 8px;
+  }
+
+  .add-btn {
+    font-size: 1rem;
+    padding: 8px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dish-item-container {
+    padding: 10px;
+  }
+
+  .left,
+  .right {
+    flex: 1;
+    margin-bottom: 15px;
+  }
+
+  .dish-name {
+    font-size: 1.1rem;
+  }
+
+  .dish-price {
+    font-size: 0.9rem;
+  }
+
+  .dish-para {
+    font-size: 0.8rem;
+  }
+
+  .dish-calories {
+    font-size: 1rem;
+  }
+
+  .dish-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .buttons-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .quantity {
+    font-size: 1rem;
+  }
+
+  .dish-btn {
+    padding: 4px 6px;
+  }
+
+  .add-btn {
+    font-size: 0.9rem;
+    padding: 6px 8px;
+  }
+}

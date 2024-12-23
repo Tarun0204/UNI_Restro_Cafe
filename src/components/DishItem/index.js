@@ -1,8 +1,8 @@
-import {useState, useContext} from 'react'
-import './index.css'
-import CartContext from '../../context/CartContext'
+import { useState, useContext } from "react";
+import "./index.css";
+import CartContext from "../../context/CartContext";
 
-const DishItem = ({dishDetails}) => {
+const DishItem = ({ dishDetails }) => {
   const {
     dishName,
     dishPrice,
@@ -12,17 +12,17 @@ const DishItem = ({dishDetails}) => {
     dishCalories,
     addonCat,
     dishAvailability,
-  } = dishDetails
+  } = dishDetails;
 
-  const [quantity, setQuantity] = useState(0)
-  const {addCartItem} = useContext(CartContext)
+  const [quantity, setQuantity] = useState(0);
+  const { addCartItem } = useContext(CartContext);
 
-  const onIncreaseQuantity = () => setQuantity(prevState => prevState + 1)
+  const onIncreaseQuantity = () => setQuantity((prevState) => prevState + 1);
 
   const onDecreaseQuantity = () =>
-    setQuantity(prevState => (prevState > 0 ? prevState - 1 : 0))
+    setQuantity((prevState) => (prevState > 0 ? prevState - 1 : 0));
 
-  const onAddItemToCart = () => addCartItem({...dishDetails, quantity})
+  const onAddItemToCart = () => addCartItem({ ...dishDetails, quantity });
 
   const renderButtonsContainer = () => (
     <div className="buttons-container">
@@ -34,7 +34,7 @@ const DishItem = ({dishDetails}) => {
         +
       </button>
     </div>
-  )
+  );
 
   return (
     <li className="dish-item-container">
@@ -44,6 +44,7 @@ const DishItem = ({dishDetails}) => {
           <p className="dish-price">
             {dishCurrency} {dishPrice}
           </p>
+          <p className="dish-calories">{dishCalories} calories</p>
           <p className="dish-para">{dishDescription}</p>
           {dishAvailability && renderButtonsContainer()}
           {!dishAvailability && <p className="not-available">Not available</p>}
@@ -57,14 +58,11 @@ const DishItem = ({dishDetails}) => {
           )}
         </div>
       </div>
-      <div className="center">
-        <p className="dish-calories">{dishCalories} calories</p>
-      </div>
       <div className="right">
         <img className="dish-image" alt={dishName} src={dishImage} />
       </div>
     </li>
-  )
-}
+  );
+};
 
-export default DishItem
+export default DishItem;

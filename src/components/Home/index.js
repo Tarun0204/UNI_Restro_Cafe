@@ -1,24 +1,24 @@
-import {useState, useEffect, useContext} from 'react'
-import {ThreeDots} from 'react-loader-spinner'
-import Header from '../Header'
-import DishItem from '../DishItem'
-import CartContext from '../../context/CartContext'
-import './index.css'
+import { useState, useEffect, useContext } from "react";
+import { ThreeDots } from "react-loader-spinner";
+import Header from "../Header";
+import DishItem from "../DishItem";
+import CartContext from "../../context/CartContext";
+import "./index.css";
 
 const Home = () => {
-  const [isLoading, setIsLoading] = useState(true)
-  const [homeResponse, setHomeResponse] = useState([])
-  const [activeCategoryId, setActiveCategoryId] = useState('')
+  const [isLoading, setIsLoading] = useState(true);
+  const [homeResponse, setHomeResponse] = useState([]);
+  const [activeCategoryId, setActiveCategoryId] = useState("");
 
-  const {cartList, setRestaurantName} = useContext(CartContext)
+  const { cartList, setRestaurantName } = useContext(CartContext);
 
-  const getHomeData = tableMenuItemsList =>
-    tableMenuItemsList.map(eachMenuItem => ({
+  const getHomeData = (tableMenuItemsList) =>
+    tableMenuItemsList.map((eachMenuItem) => ({
       menuCategory: eachMenuItem.menu_category,
       menuCategoryId: eachMenuItem.menu_category_id,
       menuCategoryImage: eachMenuItem.menu_category_image,
       categoryDishesItemsList: eachMenuItem.category_dishes.map(
-        eachDishItem => ({
+        (eachDishItem) => ({
           dishId: eachDishItem.dish_id,
           dishName: eachDishItem.dish_name,
           dishPrice: eachDishItem.dish_price,
@@ -29,44 +29,44 @@ const Home = () => {
           dishAvailability: eachDishItem.dish_Availability,
           dishType: eachDishItem.dish_Type,
           addonCat: eachDishItem.addonCat,
-        }),
+        })
       ),
-    }))
-
-  const restaurantApi = async () => {
-    const apiUrl =
-      'https://apis2.ccbp.in/restaurant-app/restaurant-menu-list-details'
-    const apiResponse = await fetch(apiUrl)
-    const data = await apiResponse.json()
-    const updatedData = getHomeData(data[0].table_menu_list)
-    setHomeResponse(updatedData)
-    setRestaurantName(data[0].restaurant_name)
-    setActiveCategoryId(updatedData[0].menuCategoryId)
-    setIsLoading(false)
-  }
+    }));
 
   useEffect(() => {
-    restaurantApi()
-  })
+    const restaurantApi = async () => {
+      const apiUrl =
+        "https://apis2.ccbp.in/restaurant-app/restaurant-menu-list-details";
+      const apiResponse = await fetch(apiUrl);
+      const data = await apiResponse.json();
+      const updatedData = getHomeData(data[0].table_menu_list);
+      setHomeResponse(updatedData);
+      setRestaurantName(data[0].restaurant_name);
+      setActiveCategoryId(updatedData[0].menuCategoryId);
+      setIsLoading(false);
+    };
 
-  const onUpdateActiveCategoryIdx = menuCategoryId =>
-    setActiveCategoryId(menuCategoryId)
+    restaurantApi();
+  }, [setRestaurantName]);
 
-  const addItemToCart = () => {}
+  const onUpdateActiveCategoryIdx = (menuCategoryId) =>
+    setActiveCategoryId(menuCategoryId);
 
-  const removeItemFromCart = () => {}
+  const addItemToCart = () => {};
+
+  const removeItemFromCart = () => {};
 
   const renderTabMenuList = () =>
-    homeResponse.map(eachCategory => {
+    homeResponse.map((eachCategory) => {
       const onClickHandler = () =>
-        onUpdateActiveCategoryIdx(eachCategory.menuCategoryId)
+        onUpdateActiveCategoryIdx(eachCategory.menuCategoryId);
 
       return (
         <li
           className={`each-tab-item ${
             eachCategory.menuCategoryId === activeCategoryId
-              ? 'active-tab-item'
-              : ''
+              ? "active-tab-item"
+              : ""
           }`}
           key={eachCategory.menuCategoryId}
           onClick={onClickHandler}
@@ -75,17 +75,17 @@ const Home = () => {
             {eachCategory.menuCategory}
           </button>
         </li>
-      )
-    })
+      );
+    });
 
   const renderDishes = () => {
-    const {categoryDishesItemsList} = homeResponse.find(
-      eachCategory => eachCategory.menuCategoryId === activeCategoryId,
-    )
+    const { categoryDishesItemsList } = homeResponse.find(
+      (eachCategory) => eachCategory.menuCategoryId === activeCategoryId
+    );
 
     return (
       <ul className="dishes-list-container">
-        {categoryDishesItemsList.map(eachDishItem => (
+        {categoryDishesItemsList.map((eachDishItem) => (
           <DishItem
             key={eachDishItem.dishId}
             dishDetails={eachDishItem}
@@ -94,14 +94,14 @@ const Home = () => {
           />
         ))}
       </ul>
-    )
-  }
+    );
+  };
 
   const renderLoadingView = () => (
     <div className="loader-container">
       <ThreeDots type="ThreeDots" color="#0b69ff" height="50" width="50" />
     </div>
-  )
+  );
 
   return isLoading ? (
     renderLoadingView()
@@ -113,7 +113,7 @@ const Home = () => {
         {renderDishes()}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

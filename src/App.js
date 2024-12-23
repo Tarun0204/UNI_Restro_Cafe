@@ -1,55 +1,65 @@
-import {useState} from 'react'
-import Home from './components/Home'
-import CartContext from './context/CartContext'
-import './App.css'
+import { Route, Routes, Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Login from "./components/Login";
+import Home from "./components/Home";
+import Cart from "./components/Cart";
+import NotFound from "./components/NotFound";
+import CartContext from "./context/CartContext";
+import "./App.css";
 
-// write your code here
 const App = () => {
-  const [cartList, setCartList] = useState([])
-  const [restaurantName, setRestaurantName] = useState('')
+  const [cartList, setCartList] = useState(
+    JSON.parse(localStorage.getItem("cartList")) || []
+  );
+  const [restaurantName, setRestaurantName] = useState("");
 
-  const addCartItem = dish => {
-    const isAlreadyExists = cartList.find(item => item.dishId === dish.dishId)
+  useEffect(() => {
+    localStorage.setItem("cartList", JSON.stringify(cartList));
+  }, [cartList]);
 
+  const addCartItem = (dish) => {
+    const isAlreadyExists = cartList.find((item) => item.dishId === dish.dishId);
     if (!isAlreadyExists) {
-      setCartList(prev => [...prev, dish])
+      setCartList((prev) => [...prev, dish]);
     } else {
-      setCartList(prev =>
-        prev.map(item =>
+      setCartList((prev) =>
+        prev.map((item) =>
           item.dishId === dish.dishId
-            ? {...item, quantity: item.quantity + dish.quantity}
-            : item,
-        ),
-      )
+            ? { ...item, quantity: item.quantity + dish.quantity }
+            : item
+        )
+      );
     }
-  }
+  };
 
-  const removeCartItem = dishId => {
-    setCartList(prevState => prevState.filter(item => item.dishId !== dishId))
-  }
+  const removeCartItem = (dishId) => {
+    setCartList((prevState) => prevState.filter((item) => item.dishId !== dishId));
+  };
 
-  const removeAllCartItems = () => setCartList([])
+  const removeAllCartItems = () => setCartList([]);
 
-  const incrementCartItemQuantity = dishId => {
-    setCartList(prevState =>
-      prevState.map(item =>
-        item.dishId === dishId ? {...item, quantity: item.quantity + 1} : item,
-      ),
-    )
-  }
+  const incrementCartItemQuantity = (dishId) => {
+    setCartList((prevState) =>
+      prevState.map((item) =>
+        item.dishId === dishId
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      )
+    );
+  };
 
-  const decrementCartItemQuantity = dishId => {
-    setCartList(
-      prevState =>
-        prevState
-          .map(item =>
-            item.dishId === dishId
-              ? {...item, quantity: Math.max(item.quantity - 1, 0)} // Ensures quantity doesn't go below 0
-              : item,
-          )
-          .filter(item => item.quantity > 0), // Removes item if quantity becomes 0
-    )
-  }
+  const decrementCartItemQuantity = (dishId) => {
+    setCartList((prevState) =>
+      prevState
+        .map((item) =>
+          item.dishId === dishId
+            ? { ...item, quantity: Math.max(item.quantity - 1, 0) }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  };
 
   return (
     <CartContext.Provider
@@ -64,9 +74,29 @@ const App = () => {
         setRestaurantName,
       }}
     >
-      <Home />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/not-found" element={<NotFound />} />
+        <Route path="*" element={<Navigate to="/not-found" />} />
+      </Routes>
     </CartContext.Provider>
-  )
-}
+  );
+};
 
-export default App
+export default App;
